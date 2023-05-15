@@ -11,7 +11,7 @@ class Car implements ITransport {
 
     constructor(count_wheels: number, count_doors: number) {
         this.count_wheels = count_wheels;
-        this.count_doors = this.count_doors;
+        this.count_doors = count_doors;
     }
     
     start() {
