@@ -3,38 +3,71 @@ var House = /** @class */ (function () {
     }
     return House;
 }());
-var HouseBuilder = /** @class */ (function () {
-    function HouseBuilder() {
+var HouseWoodenBuilder = /** @class */ (function () {
+    function HouseWoodenBuilder() {
         this.resetHouse();
     }
-    HouseBuilder.prototype.resetHouse = function () {
+    HouseWoodenBuilder.prototype.resetHouse = function () {
         this.house = new House();
     };
-    HouseBuilder.prototype.createWalls = function (number) {
+    HouseWoodenBuilder.prototype.createWalls = function (number) {
         this.house.walls = number;
+        this.house.wallsMaterial = 'tree';
     };
-    HouseBuilder.prototype.createArcitectureHome = function () {
-        console.log('this.houseWall', this.house);
+    HouseWoodenBuilder.prototype.createArcitectureHome = function () {
         this.house.arcitectureHome = true;
     };
     ;
-    HouseBuilder.prototype.createDoors = function (number) {
+    HouseWoodenBuilder.prototype.createDoors = function (number) {
         this.house.doors = number;
     };
-    HouseBuilder.prototype.createWindows = function (number) {
+    HouseWoodenBuilder.prototype.createWindows = function (number) {
         this.house.windows = number;
     };
-    HouseBuilder.prototype.createRepair = function (number) {
+    HouseWoodenBuilder.prototype.createRepair = function (number) {
         this.house.costRepair = number;
     };
     ;
-    HouseBuilder.prototype.getHouse = function () {
+    HouseWoodenBuilder.prototype.getHouse = function () {
         var result = this.house;
         console.log('created house', JSON.stringify(this.house));
         this.resetHouse();
         return result;
     };
-    return HouseBuilder;
+    return HouseWoodenBuilder;
+}());
+var HouseStoneBuilder = /** @class */ (function () {
+    function HouseStoneBuilder() {
+        this.resetHouse();
+    }
+    HouseStoneBuilder.prototype.resetHouse = function () {
+        this.house = new House();
+    };
+    HouseStoneBuilder.prototype.createWalls = function (number) {
+        this.house.walls = number;
+        this.house.wallsMaterial = 'stone';
+    };
+    HouseStoneBuilder.prototype.createArcitectureHome = function () {
+        this.house.arcitectureHome = true;
+    };
+    ;
+    HouseStoneBuilder.prototype.createDoors = function (number) {
+        this.house.doors = number;
+    };
+    HouseStoneBuilder.prototype.createWindows = function (number) {
+        this.house.windows = number;
+    };
+    HouseStoneBuilder.prototype.createRepair = function (number) {
+        this.house.costRepair = number;
+    };
+    ;
+    HouseStoneBuilder.prototype.getHouse = function () {
+        var result = this.house;
+        console.log('created house', JSON.stringify(this.house));
+        this.resetHouse();
+        return result;
+    };
+    return HouseStoneBuilder;
 }());
 var Director = /** @class */ (function () {
     function Director() {
@@ -58,11 +91,19 @@ var Director = /** @class */ (function () {
     return Director;
 }());
 var director = new Director();
-var builder = new HouseBuilder();
-director.setBuilder(builder);
-console.log('Create small, low cost house');
+var builderWood = new HouseWoodenBuilder();
+var bilderStone = new HouseStoneBuilder();
+director.setBuilder(builderWood);
+console.log('Create small, low cost stone house');
 director.createSmallHouse();
-builder.getHouse();
-console.log('Create big, expensive house');
+builderWood.getHouse();
+director.setBuilder(bilderStone);
 director.createExpensiveHouse();
-builder.getHouse();
+bilderStone.getHouse();
+// console.log('Create big, expensive stone house without director');
+// bilderStone.createArcitectureHome();
+// bilderStone.createWalls(15);
+// bilderStone.createDoors(20);
+// bilderStone.createWindows(10);
+// bilderStone.createRepair(25000);
+// bilderStone.getHouse();

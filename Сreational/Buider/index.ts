@@ -10,10 +10,11 @@ class House {
     windows: number;
     doors: number;
     walls: number;
+    wallsMaterial: string;
     arcitectureHome?: boolean;
     costRepair: number;
 } 
-class HouseBuilder implements IHome {
+class HouseWoodenBuilder implements IHome {
     private house: House;
 
     constructor() {
@@ -26,10 +27,50 @@ class HouseBuilder implements IHome {
 
     createWalls(number: number): void {
         this.house.walls = number;
+        this.house.wallsMaterial = 'tree';
     }
 
     createArcitectureHome(): void {
-        console.log('this.houseWall', this.house);
+        this.house.arcitectureHome = true;
+    };
+
+    createDoors(number: number): void {
+        this.house.doors = number;
+    }
+
+    createWindows(number: number): void {
+        this.house.windows = number;
+    }
+
+    createRepair(number: number): void {
+        this.house.costRepair = number;
+    };
+
+    getHouse() {
+        const result = this.house;
+        console.log('created house', JSON.stringify(this.house));
+        this.resetHouse();
+        return result;
+    }
+}
+
+class HouseStoneBuilder implements IHome {
+    private house: House;
+
+    constructor() {
+        this.resetHouse();
+    }
+
+    resetHouse(): void {
+        this.house = new House();
+    }
+
+    createWalls(number: number): void {
+        this.house.walls = number;
+        this.house.wallsMaterial = 'stone';
+    }
+
+    createArcitectureHome(): void {
         this.house.arcitectureHome = true;
     };
 
@@ -77,15 +118,21 @@ class Director {
 }
 
 const director = new Director();
-const builder = new HouseBuilder();
-director.setBuilder(builder);
+const builderWood = new HouseWoodenBuilder();
+const bilderStone = new HouseStoneBuilder();
+director.setBuilder(builderWood);
 
-console.log('Create small, low cost house');
+console.log('Create small, low cost stone house');
 
 director.createSmallHouse();
-builder.getHouse();
+builderWood.getHouse();
 
-console.log('Create big, expensive house');
+console.log('Create big, expensive stone house without director');
 
-director.createExpensiveHouse();
-builder.getHouse();
+bilderStone.createArcitectureHome();
+bilderStone.createWalls(15);
+bilderStone.createDoors(20);
+bilderStone.createWindows(10);
+bilderStone.createRepair(25000);
+
+bilderStone.getHouse();
