@@ -1,4 +1,3 @@
-console.log('----');
 class Prototype {
     countDoors: number;
     createdAt: object;
