@@ -18,23 +18,23 @@ class Vehicle implements IVehicle {
     }
 }
 
-class CarDecorator implements Vehicle {
-    private wrapee;
+class CarDecorator implements IVehicle {
+    private wrapped;
 
-    constructor(Vehicle) {
-        this.wrapee = Vehicle;
+    constructor(vehicle: IVehicle) {
+        this.wrapped = vehicle;
     }
 
     start() {
-        return this.wrapee.start();
+        return this.wrapped.start();
     }
 
     stop() {
-        return this.wrapee.stop();
+        return this.wrapped.stop();
     }
 
     openDoor() {
-        return this.wrapee.openDoor();
+        return this.wrapped.openDoor();
     };
 
     playMusic() {
@@ -42,23 +42,23 @@ class CarDecorator implements Vehicle {
     }
 }
 
-class BikeDecorator implements Vehicle {
-    private wrapee;
+class BikeDecorator implements IVehicle {
+    private wrapped;
 
-    constructor(Vehicle) {
-        this.wrapee = Vehicle;
+    constructor(vehicle: IVehicle) {
+        this.wrapped = vehicle;
     }
 
     start() {
-        return this.wrapee.start();
+        return this.wrapped.start();
     }
 
     stop() {
-        return this.wrapee.stop();
+        return this.wrapped.stop();
     }
 
     openDoor() {
-        return this.wrapee.openDoor();
+        return this.wrapped.openDoor();
     };
 
     stanBack() {
@@ -66,23 +66,23 @@ class BikeDecorator implements Vehicle {
     }
 }
 
-class PlaneDecorator implements Vehicle {
-    private wrapee;
+class PlaneDecorator implements IVehicle {
+    private wrapped;
 
-    constructor(Vehicle) {
-        this.wrapee = Vehicle;
+    constructor(vehicle: IVehicle) {
+        this.wrapped = vehicle;
     }
 
     start() {
-        return this.wrapee.start();
+        return this.wrapped.start();
     }
 
     stop() {
-        return this.wrapee.stop();
+        return this.wrapped.stop();
     }
 
     openDoor() {
-        return this.wrapee.openDoor();
+        return this.wrapped.openDoor();
     };
 
     forsage() {
@@ -93,17 +93,18 @@ class PlaneDecorator implements Vehicle {
 
 class Application {
     runApplication() {
-        const source = new Vehicle();
-        const c = new CarDecorator(source);
+        const source: IVehicle = new Vehicle();
+        const carD = new CarDecorator(source);
+        const c = new CarDecorator(carD);
         console.log(c.openDoor());
         console.log(c.start());
         console.log(c.playMusic());
         console.log(c.stop());
         const p = new PlaneDecorator(source);
-        console.log(p.openDoor);
-        console.log(p.start);
-        console.log(p.forsage);
-        console.log(p.stop);
+        console.log(p.openDoor());
+        console.log(p.start());
+        console.log(p.forsage());
+        console.log(p.stop());
         const b = new BikeDecorator(source);
         console.log(b.openDoor());
         console.log(b.start());

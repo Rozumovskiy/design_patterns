@@ -80,10 +80,10 @@ var Application = /** @class */ (function () {
         console.log(c.playMusic());
         console.log(c.stop());
         var p = new PlaneDecorator(source);
-        console.log(p.openDoor);
-        console.log(p.start);
-        console.log(p.forsage);
-        console.log(p.stop);
+        console.log(p.openDoor());
+        console.log(p.start());
+        console.log(p.forsage());
+        console.log(p.stop());
         var b = new BikeDecorator(source);
         console.log(b.openDoor());
         console.log(b.start());
