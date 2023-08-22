@@ -17,18 +17,23 @@ var AirConditioning = /** @class */ (function () {
 }());
 var AirConditioningProxy = /** @class */ (function () {
     function AirConditioningProxy(airConditioning) {
+        this.log = [];
         this.wrapped = airConditioning;
     }
     AirConditioningProxy.prototype.startAirConditioning = function () {
+        this.log.push('Air conditioning started');
         return this.wrapped.startAirConditioning();
     };
     AirConditioningProxy.prototype.stopAirConditioning = function () {
+        this.log.push('Air conditioning stoped');
         return this.wrapped.stopAirConditioning();
     };
     AirConditioningProxy.prototype.upTemperature = function () {
+        this.log.push('Temperature up');
         return this.wrapped.upTemperature();
     };
     AirConditioningProxy.prototype.downTemperature = function () {
+        this.log.push('Temperature down');
         return this.wrapped.downTemperature();
     };
     return AirConditioningProxy;
@@ -62,3 +67,4 @@ var downC = manager.downTemperature();
 console.log(downC);
 var stopC = manager.stopAirConditioning();
 console.log(stopC);
+console.log(airConditioningProxy.log);

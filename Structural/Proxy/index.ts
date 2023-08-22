@@ -25,24 +25,29 @@ class AirConditioning implements IAirConditioning {
 
 class AirConditioningProxy implements IAirConditioning {
     private wrapped;
+    public log: string[] = [];
 
     constructor(airConditioning: IAirConditioning) {
         this.wrapped = airConditioning;
     }
 
     startAirConditioning() {
+        this.log.push('Air conditioning started');
         return this.wrapped.startAirConditioning();
     }
 
     stopAirConditioning() {
+        this.log.push('Air conditioning stoped');
         return this.wrapped.stopAirConditioning();
     }
 
     upTemperature() {
+        this.log.push('Temperature up');
         return this.wrapped.upTemperature();
     }
 
     downTemperature() {
+        this.log.push('Temperature down');
         return this.wrapped.downTemperature();
     }
 }
@@ -82,3 +87,4 @@ const downC = manager.downTemperature();
 console.log(downC);
 const stopC = manager.stopAirConditioning();
 console.log(stopC);
+console.log(airConditioningProxy.log);
